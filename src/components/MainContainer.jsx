@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import CsvReader from "./CsvReader.jsx";
 import {useEffect, useState} from "react";
 import AnalyseComponent from "./AnalyseComponent.jsx";
@@ -19,29 +20,29 @@ const MainContainer = () => {
 
 
   return (
-      <div className='pt-16 w-full h-screen  '  >
+      <Container  >
         {
           errorMessage ?
-              <p className='text-xl text-red-300' >{errorMessage}</p> :
+              <ErrorMessage className='text-xl text-red-300' >{errorMessage}</ErrorMessage> :
               null
         }
-        <div className='flex justify-around items-center py-4'>
-          <div className='flex flex-col' >
+        <InputsContainer className='flex justify-around items-center py-4'>
+          <div >
            <CsvReader
                setFacture={setFacture}
                setErrorMessage={setErrorMessage}
                title='Facture Négocié'
            />
           </div>
-          <div className='flex flex-col'>
+          <div >
             <CsvReader
                 setFacture={setFactureCheck}
                 setErrorMessage={setErrorMessage}
                 title='Facture à Vérifier'
             />
           </div>
-        </div>
-        <div className=' m-4 p-4 border rounded'>
+        </InputsContainer>
+        <ResultsContainer className=' m-4 p-4 border rounded'>
           {
             isFacture ?
                 <>
@@ -55,9 +56,36 @@ const MainContainer = () => {
                   </div>
                 </>
           }
-        </div>
-      </div >
+        </ResultsContainer>
+      </Container >
   );
 };
 
 export default MainContainer;
+
+const Container = styled.div` 
+  padding-top: 16px;
+  width: 100vw;
+  height: 100vh;
+`
+
+const ErrorMessage = styled.p`
+  color: #fca5a5;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+`
+
+const InputsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  padding: 0 4px;
+`
+
+const ResultsContainer = styled.div`
+  margin: 32px auto;
+  padding: 16px;
+  border: 1px Solid #555;
+  width: 80%;
+  border-radius: 10px;
+`

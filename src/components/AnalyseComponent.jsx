@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ResultCard from "./ResultCard.jsx";
+import styled from "styled-components";
 
 const AnalyseComponent = ({facture, factureCheck}) => {
   const [results, setResults] = useState([])
@@ -29,20 +30,52 @@ const AnalyseComponent = ({facture, factureCheck}) => {
 
 
   return (
-      <div className='flex w-full justify-around' >
+      <Analyse className='flex w-full justify-around' >
         <ul className='w-full'>
           {
             results.length > 0 ?
             results.map((item, index) => (
                 <ResultCard key={index} result={item} />
             )) :
-            <li className='bg-green-200 p-2 flex border rounded items-center justify-center'>
+            <li className='success'>
               <p>Aucune erreur détectée</p>
             </li>
           }
         </ul>
-      </div >
+      </Analyse >
   );
 };
 
 export default AnalyseComponent;
+
+const Analyse = styled.div `
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  
+  ul {
+    width: 100%;
+    list-style: none;
+    
+    li {
+      margin: .5rem 0;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      
+      &.success {
+        justify-content: center;
+        background: #bbf7d0;
+        color: #15803d;
+      }
+      
+      &.errors {
+        justify-content: flex-start;
+        gap: 4rem;
+        background-color: #fecaca;
+        color: #991b1b;
+      }
+    }
+  }
+`
